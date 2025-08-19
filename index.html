@@ -204,7 +204,7 @@
             const [isFirstRender, setIsFirstRender] = useState(true);
 
             const paramConfig = {
-                pStartPrice: { min: 0, max: 1, step: 0.01, label: 'Starting share price', format: (v) => `$${v}` },
+                pStartPrice: { min: 0, max: 1, step: 0.01, label: 'Initial price', format: (v) => `$${v}` },
                 forecastDelta: { min: 0, max: maxForecast * (1 - params.pStartPrice), step: 1, label: 'Gap from required forecast to win', format: (v) => `${v} mtvl` },
                 costToIncreaseMetricPerIncrement: { min: 0, max: 5000, step: 100, label: 'Initial cost to increase metric per increment', format: (v) => `$${v}` },
                 metricCostIncreasePerIncrement: { min: 0, max: 100, step: 1, label: 'Cost increase rate per metric increment', format: (v) => `$${v}` },
