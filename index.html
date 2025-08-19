@@ -254,7 +254,7 @@
                         mode: 'lines',
                         name: 'profit of mkt manip + optimal metric manip',
                         line: { color: 'orange', width: 2 },
-                        hovertemplate: '<b>profit of mkt manip + optimal metric manip</b><br>UP tokens: %{x:,.0f}<br>Profit: $%{y:,.0f}<extra></extra>'
+                        hovertemplate: '<b>profit (w/ metric manip)</b><br>UP tokens: %{x:,.0f}<br>Profit: $%{y:,.0f}<extra></extra>'
                     },
                     {
                         x: xVals,
@@ -262,7 +262,7 @@
                         mode: 'lines',
                         name: 'profit of mkt manip only. no metric manip',
                         line: { color: 'blue', width: 2 },
-                        hovertemplate: '<b>profit of mkt manip only. no metric manip</b><br>UP tokens: %{x:,.0f}<br>Profit: $%{y:,.0f}<extra></extra>'
+                        hovertemplate: '<b>profit (w/o metric manip)</b><br>UP tokens: %{x:,.0f}<br>Profit: $%{y:,.0f}<extra></extra>'
                     },
                     {
                         x: xVals,
@@ -270,7 +270,7 @@
                         mode: 'lines',
                         name: 'profit of best strat (pos)',
                         line: { color: 'green', width: 5 },
-                        hovertemplate: '<b>profit of best strat</b><br>UP tokens: %{x:,.0f}<br>Profit: $%{y:,.0f}<extra></extra>'
+                        hovertemplate: '<b>profit (max)</b><br>UP tokens: %{x:,.0f}<br>Profit: $%{y:,.0f}<extra></extra>'
                     },
                     {
                         x: negativeOptimalX,
@@ -278,7 +278,7 @@
                         mode: 'lines',
                         name: 'profit of best strat (neg)',
                         line: { color: 'red', width: 5 },
-                        hovertemplate: '<b>profit of best strat (neg)</b><br>UP tokens: %{x:,.0f}<br>Profit: $%{y:,.0f}<extra></extra>'
+                        hovertemplate: '<b>profit (best)</b><br>UP tokens: %{x:,.0f}<br>Profit: $%{y:,.0f}<extra></extra>'
                     },
                     {
                         x: xVals,
@@ -287,7 +287,7 @@
                         name: 'optimal metric manip',
                         line: { color: 'purple', width: 2, dash: 'dash' },
                         customdata: optimalManipVals,
-                        hovertemplate: '<b>optimal metric manip</b><br>metric manip: %{customdata:.1f}<extra></extra>'
+                        hovertemplate: '<b>metric manip</b><br>UP tokens: %{x:,.0f}<br>manip amt: %{customdata:.1f} mtvl<extra></extra>'
                     }
                 ];
 
