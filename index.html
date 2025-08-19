@@ -234,17 +234,17 @@
                 // Use fixed scaling for m_manip to keep it consistent across parameter changes
                 const scaledManipVals = optimalManipVals.map(m => m * 300);
 
+                // Create arrays for negative portions of optimal profit curve
+                const negativeOptimalX = [];
+                const negativeOptimalY = [];
+                for (let i = 0; i < xVals.length; i++) {
+                    if (profitOfBestStratVals[i] < 0) {
+                        negativeOptimalX.push(xVals[i]);
+                        negativeOptimalY.push(profitOfBestStratVals[i]);
+                    }
+                }
+
                 const traces = [
-                    {
-                        x: xVals,
-                        y: profitOfBestStratVals.map(y => Math.min(y, 0)),
-                        fill: 'tozeroy',
-                        fillcolor: 'rgba(255, 0, 0, 0.3)',
-                        line: { color: 'rgba(255, 0, 0, 0)' },
-                        name: 'Loss area',
-                        showlegend: false,
-                        hoverinfo: 'skip'
-                    },
                     {
                         x: xVals,
                         y: manipProfitVals,
@@ -265,9 +265,17 @@
                         x: xVals,
                         y: profitOfBestStratVals,
                         mode: 'lines',
-                        name: 'y (optimal profit)',
-                        line: { color: 'black', width: 4 },
+                        name: 'profit of best strat (> 0)',
+                        line: { color: 'green', width: 5 },
                         hovertemplate: '<b>y (optimal)</b><br>UP tokens: %{x:,.0f}<br>Profit: $%{y:,.0f}<extra></extra>'
+                    },
+                    {
+                        x: negativeOptimalX,
+                        y: negativeOptimalY,
+                        mode: 'lines',
+                        name: 'profit of best strat (< 0)',
+                        line: { color: 'red', width: 5 },
+                        hovertemplate: '<b>y (optimal - losses)</b><br>UP tokens: %{x:,.0f}<br>Profit: $%{y:,.0f}<extra></extra>'
                     },
                     // {
                     //     x: xVals,
