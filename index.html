@@ -163,16 +163,13 @@
                 // PnL of strategy with highest pnl (i.e. either manipulate metric or do not manipulate metric)
                 const profitOfBestStrat = Math.max(optimalProfit, noManipProfit);
 
-                // Only show optimal m_manip if p_manip is positive
-                const optimalManip_final = optimalProfit > 0 ? optimalManip : 0;
-
                 return {
                     x,
                     pManip: optimalProfit,
                     pNomanip: noManipProfit,
                     yPositive: profitOfBestStrat > 0 ? profitOfBestStrat : null,
                     yNegative: profitOfBestStrat < 0 ? profitOfBestStrat : null,
-                    optimalM: optimalManip_final
+                    optimalM: optimalManip
                 };
             });
 
@@ -277,15 +274,15 @@
                         line: { color: 'red', width: 5 },
                         hovertemplate: '<b>y (optimal - losses)</b><br>UP tokens: %{x:,.0f}<br>Profit: $%{y:,.0f}<extra></extra>'
                     },
-                    // {
-                    //     x: xVals,
-                    //     y: scaledManipVals,
-                    //     mode: 'lines',
-                    //     name: 'optimal m_manip (scaled)',
-                    //     line: { color: 'purple', width: 2, dash: 'dash' },
-                    //     customdata: optimalManipVals,
-                    //     hovertemplate: '<b>optimal m_manip</b><br>UP tokens: %{x:,.0f}<br>Actual m_manip: %{customdata:.1f}<br>Scaled value: $%{y:,.0f}<extra></extra>'
-                    // }
+                    {
+                        x: xVals,
+                        y: scaledManipVals,
+                        mode: 'lines',
+                        name: 'optimal m_manip (scaled)',
+                        line: { color: 'purple', width: 2, dash: 'dash' },
+                        customdata: optimalManipVals,
+                        hovertemplate: '<b>optimal m_manip</b><br>UP tokens: %{x:,.0f}<br>Actual m_manip: %{customdata:.1f}<br>Scaled value: $%{y:,.0f}<extra></extra>'
+                    }
                 ];
 
                 // Only calculate y-range on first render
