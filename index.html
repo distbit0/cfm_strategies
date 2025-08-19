@@ -103,7 +103,7 @@
         const { useState, useEffect, useRef } = React;
 
         // JavaScript port of calculation functions
-        function calculatePManip(xVal, metricManipAmt, params) {
+        function calcManipProfit(xVal, metricManipAmt, params) {
             const { pStartPrice, forecastDelta, costToIncreaseMetricPerIncrement, metricCostIncreasePerIncrement, grantValue, valueOfMetricIncrease, capitalOpportunityCost, maxForecast, priceImpact } = params;
 
             // loss from acquiring x shares
@@ -121,13 +121,13 @@
             return (mktProfit - priceImpactLoss) - costOfManipulatingMetric + metricManipBenefit - manipCapitalReqs * capitalOpportunityCost;
         }
 
-        function optimizeMManip(xVal, params) {
+        function calcOptimalManipAmt(xVal, params) {
             const { pStartPrice, maxForecast } = params;
             // how much project decides to increase the metric by
             const maxMetricManipAmt = (1 - pStartPrice) * maxForecast;
 
             let optimalManip = 0;
-            let optimalProfit = calculatePManip(xVal, 0, params);
+            let optimalProfit = calcManipProfit(xVal, 0, params);
 
             // Prevent infinite loop when maxMetricManipAmt is very small
             if (maxMetricManipAmt < 0.01) {
@@ -137,7 +137,7 @@
             const stepSize = Math.max(maxMetricManipAmt / 10000, 0.01);
             for (let m = 0; m <= maxMetricManipAmt; m += stepSize) {
                 if (m < 0) continue;
-                const p = calculatePManip(xVal, m, params);
+                const p = calcManipProfit(xVal, m, params);
                 if (p > optimalProfit) {
                     optimalProfit = p;
                     optimalManip = m;
@@ -157,10 +157,10 @@
             }
 
             const results = xVals.map(x => {
-                const [optimalManip, optimalProfit] = optimizeMManip(x, params);
+                const [optimalManip, optimalProfit] = calcOptimalManipAmt(x, params);
 
                 // total pnl, if we manip market, receive grant and do not manip metric
-                // loss from acquiring x shares (reuse same calculation as in calculate_p_manip)
+                // loss from acquiring x shares (reuse same calculation as in calcManipProfit)
                 const priceImpactLoss = x * (forecastDelta * priceImpact / maxForecast);
                 // capital required to manip market (reuse same base calculation)
                 const noManipCapitalReqs = x > 0 ? x * (pStartPrice * maxForecast + forecastDelta * priceImpact) / maxForecast : 0;
@@ -234,7 +234,7 @@
                 const profitOfBestStratVals = data.map(d => Math.max(d.pManip, d.pNomanip));
                 const optimalManipVals = data.map(d => d.optimalM);
 
-                // Use fixed scaling for m_manip to keep it consistent across parameter changes
+                // Use fixed scaling for optimalManipVals to keep it consistent across parameter changes
                 const scaledManipVals = optimalManipVals.map(m => m * 1000);
 
                 // Create arrays for negative portions of optimal profit curve
@@ -254,7 +254,7 @@
                         mode: 'lines',
                         name: 'profit of mkt manip + optimal metric manip',
                         line: { color: 'orange', width: 2 },
-                        hovertemplate: '<b>p_manip</b><br>UP tokens: %{x:,.0f}<br>Profit: $%{y:,.0f}<extra></extra>'
+                        hovertemplate: '<b>profit of mkt manip + optimal metric manip</b><br>UP tokens: %{x:,.0f}<br>Profit: $%{y:,.0f}<extra></extra>'
                     },
                     {
                         x: xVals,
@@ -262,7 +262,7 @@
                         mode: 'lines',
                         name: 'profit of mkt manip only. no metric manip',
                         line: { color: 'blue', width: 2 },
-                        hovertemplate: '<b>p_nomanip</b><br>UP tokens: %{x:,.0f}<br>Profit: $%{y:,.0f}<extra></extra>'
+                        hovertemplate: '<b>profit of mkt manip only. no metric manip</b><br>UP tokens: %{x:,.0f}<br>Profit: $%{y:,.0f}<extra></extra>'
                     },
                     {
                         x: xVals,
@@ -270,7 +270,7 @@
                         mode: 'lines',
                         name: 'profit of best strat (pos)',
                         line: { color: 'green', width: 5 },
-                        hovertemplate: '<b>y (optimal)</b><br>UP tokens: %{x:,.0f}<br>Profit: $%{y:,.0f}<extra></extra>'
+                        hovertemplate: '<b>profit of best strat</b><br>UP tokens: %{x:,.0f}<br>Profit: $%{y:,.0f}<extra></extra>'
                     },
                     {
                         x: negativeOptimalX,
@@ -278,16 +278,16 @@
                         mode: 'lines',
                         name: 'profit of best strat (neg)',
                         line: { color: 'red', width: 5 },
-                        hovertemplate: '<b>y (optimal - losses)</b><br>UP tokens: %{x:,.0f}<br>Profit: $%{y:,.0f}<extra></extra>'
+                        hovertemplate: '<b>profit of best strat (neg)</b><br>UP tokens: %{x:,.0f}<br>Profit: $%{y:,.0f}<extra></extra>'
                     },
                     {
                         x: xVals,
                         y: scaledManipVals,
                         mode: 'lines',
-                        name: 'optimal m_manip (scaled)',
+                        name: 'optimal metric manip',
                         line: { color: 'purple', width: 2, dash: 'dash' },
                         customdata: optimalManipVals,
-                        hovertemplate: '<b>optimal m_manip</b><br>UP tokens: %{x:,.0f}<br>Actual m_manip: %{customdata:.1f}<br>Scaled value: $%{y:,.0f}<extra></extra>'
+                        hovertemplate: '<b>optimal metric manip</b><br>metric manip: %{customdata:.1f}<extra></extra>'
                     }
                 ];
 
