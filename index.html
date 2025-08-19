@@ -146,8 +146,8 @@
 
             // Create range of x values (number of UP tokens purchased by project)
             const xVals = [];
-            for (let i = 0; i <= 5000; i++) {
-                xVals.push((i / 5000) * 20000000);
+            for (let i = 0; i <= 2000; i++) {
+                xVals.push((i / 2000) * 10000000);
             }
 
             const results = xVals.map(x => {
@@ -204,7 +204,7 @@
             const [isFirstRender, setIsFirstRender] = useState(true);
 
             const paramConfig = {
-                pStartPrice: { min: 0, max: 1, step: 0.01, label: 'Initial conditional-mkt price', format: (v) => `$${v}` },
+                pStartPrice: { min: 0, max: 1, step: 0.01, label: 'Starting forecast price', format: (v) => `$${v}` },
                 forecastDelta: { min: 0, max: maxForecast * (1 - params.pStartPrice), step: 1, label: 'Gap from required forecast to win', format: (v) => `${v} mtvl` },
                 costToIncreaseMetricPerIncrement: { min: 0, max: 5000, step: 100, label: 'Initial cost to increase metric per increment', format: (v) => `$${v}` },
                 metricCostIncreasePerIncrement: { min: 0, max: 100, step: 1, label: 'Cost increase rate per metric increment', format: (v) => `$${v}` },
