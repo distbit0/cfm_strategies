@@ -268,7 +268,7 @@
                         x: xVals,
                         y: profitOfBestStratVals,
                         mode: 'lines',
-                        name: 'profit of best strat (pos)',
+                        name: 'profit (max)',
                         line: { color: 'green', width: 5 },
                         hovertemplate: '<b>profit (max)</b><br>UP tokens: %{x:,.0f}<br>Profit: $%{y:,.0f}<extra></extra>'
                     },
@@ -276,9 +276,9 @@
                         x: negativeOptimalX,
                         y: negativeOptimalY,
                         mode: 'lines',
-                        name: 'profit of best strat (neg)',
+                        name: ' ', //profit of best strat (neg)',
                         line: { color: 'red', width: 5 },
-                        hovertemplate: '<b>profit (best)</b><br>UP tokens: %{x:,.0f}<br>Profit: $%{y:,.0f}<extra></extra>'
+                        hovertemplate: ' ' //<b>profit (best)</b><br>UP tokens: %{x:,.0f}<br>Profit: $%{y:,.0f}<extra></extra>'
                     },
                     {
                         x: xVals,
