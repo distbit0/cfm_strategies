@@ -259,15 +259,15 @@
                         line: { color: 'darkgreen', width: 3 },
                         hovertemplate: '<b>y (optimal)</b><br>UP tokens: %{x:,.0f}<br>Profit: $%{y:,.0f}<extra></extra>'
                     },
-                    {
-                        x: xVals,
-                        y: scaledManipVals,
-                        mode: 'lines',
-                        name: 'optimal m_manip (scaled)',
-                        line: { color: 'purple', width: 2, dash: 'dash' },
-                        customdata: optimalManipVals,
-                        hovertemplate: '<b>optimal m_manip</b><br>UP tokens: %{x:,.0f}<br>Actual m_manip: %{customdata:.1f}<br>Scaled value: $%{y:,.0f}<extra></extra>'
-                    }
+                    // {
+                    //     x: xVals,
+                    //     y: scaledManipVals,
+                    //     mode: 'lines',
+                    //     name: 'optimal m_manip (scaled)',
+                    //     line: { color: 'purple', width: 2, dash: 'dash' },
+                    //     customdata: optimalManipVals,
+                    //     hovertemplate: '<b>optimal m_manip</b><br>UP tokens: %{x:,.0f}<br>Actual m_manip: %{customdata:.1f}<br>Scaled value: $%{y:,.0f}<extra></extra>'
+                    // }
                 ];
 
                 // Only calculate y-range on first render
