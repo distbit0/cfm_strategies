@@ -1,0 +1,381 @@
+{
+  "version": 11,
+  "randomSeed": "cac1cfc15b6ce4c4e8f967e5af6b6288",
+  "graph": {
+    "viewport": {
+      "xmin": -95.53236272725024,
+      "ymin": -295.43694679973976,
+      "xmax": 815.9602121061321,
+      "ymax": 388.01723911593706
+    },
+    "showGrid": false,
+    "xAxisLabel": "# of UP tokens purchased by project",
+    "yAxisLabel": "total $profit from manipulation",
+    "__v12ViewportLatexStash": {
+      "xmin": "-95.53236272725024",
+      "xmax": "815.9602121061321",
+      "ymin": "-295.43694679973976",
+      "ymax": "388.01723911593706"
+    }
+  },
+  "expressions": {
+    "list": [
+      {
+        "type": "folder",
+        "id": "36",
+        "title": "inputs",
+        "hidden": true
+      },
+      {
+        "type": "text",
+        "id": "61",
+        "folderId": "36",
+        "text": "starting p price"
+      },
+      {
+        "type": "expression",
+        "id": "27",
+        "folderId": "36",
+        "color": "#2d70b3",
+        "latex": "p_{start}=0.5",
+        "slider": {
+          "hardMin": true,
+          "hardMax": true,
+          "min": "0",
+          "max": "1"
+        }
+      },
+      {
+        "type": "text",
+        "id": "63",
+        "folderId": "36",
+        "text": "how far project's impact is from the amount required to win"
+      },
+      {
+        "type": "expression",
+        "id": "29",
+        "folderId": "36",
+        "color": "#6042a6",
+        "latex": "f_{delta}\\ =30",
+        "slider": {
+          "hardMin": true,
+          "hardMax": true,
+          "playDirection": -1,
+          "min": "0",
+          "max": "\\left(1-p_{start}\\right)\\cdot f_{max}"
+        }
+      },
+      {
+        "type": "text",
+        "id": "66",
+        "folderId": "36",
+        "text": "initial mechanical cost of increasing metric per mtvl., after increasing it by the amount required by the grant"
+      },
+      {
+        "type": "expression",
+        "id": "32",
+        "folderId": "36",
+        "color": "#2d70b3",
+        "latex": "m_{cost}=2000",
+        "slider": {
+          "hardMin": true,
+          "hardMax": true,
+          "min": "0",
+          "max": "4000"
+        }
+      },
+      {
+        "type": "text",
+        "id": "132",
+        "folderId": "36",
+        "text": "rate at which metric production cost increases per unit of metric increase. i.e. \"cost acceleration rate\" (dollars per unit of metric). calculate this by dividing m_cost (e.g. 2000) by the project's metric impact (e.g. 60) and then multiplying by whatever % more expensive you expect each subsequent reproduction of the initial impact will be"
+      },
+      {
+        "type": "expression",
+        "id": "133",
+        "folderId": "36",
+        "color": "#2d70b3",
+        "latex": "m_{acc}=15",
+        "slider": {
+          "hardMin": true,
+          "hardMax": true,
+          "min": "0",
+          "max": "20"
+        }
+      },
+      {
+        "type": "text",
+        "id": "129",
+        "folderId": "36",
+        "text": "how much value the project assigns to winning"
+      },
+      {
+        "type": "expression",
+        "id": "130",
+        "folderId": "36",
+        "color": "#2d70b3",
+        "latex": "g_{value}=35000",
+        "slider": {
+          "hardMin": true,
+          "hardMax": true,
+          "min": "0",
+          "max": "100000"
+        }
+      },
+      {
+        "type": "text",
+        "id": "69",
+        "folderId": "36",
+        "text": "how much project values each mtvl metric increase. we assume this is constant over the range."
+      },
+      {
+        "type": "expression",
+        "id": "33",
+        "folderId": "36",
+        "color": "#388c46",
+        "latex": "m_{value}=700",
+        "slider": {
+          "hardMin": true,
+          "hardMax": true,
+          "min": "0",
+          "max": "2000"
+        }
+      },
+      {
+        "type": "text",
+        "id": "126",
+        "folderId": "36",
+        "text": "capital opp cost (incl. risk aversion) of project"
+      },
+      {
+        "type": "expression",
+        "id": "125",
+        "folderId": "36",
+        "color": "#6042a6",
+        "latex": "c_{cost}=0.15",
+        "slider": {
+          "hardMin": true,
+          "hardMax": true,
+          "min": "0",
+          "max": "1"
+        }
+      },
+      {
+        "type": "folder",
+        "id": "91",
+        "title": "inputs set to reasonable best case scenarios (from project's perspective)"
+      },
+      {
+        "type": "text",
+        "id": "74",
+        "folderId": "91",
+        "text": "max forecast"
+      },
+      {
+        "type": "expression",
+        "id": "73",
+        "folderId": "91",
+        "color": "#c74440",
+        "latex": "f_{max}=200",
+        "slider": {
+          "hardMin": true,
+          "hardMax": true,
+          "min": "0",
+          "max": "200"
+        }
+      },
+      {
+        "type": "text",
+        "id": "68",
+        "folderId": "91",
+        "text": "how much price impact project incurs on their trade, as a proportion of how much they move the forecast. assume worst case scenario"
+      },
+      {
+        "type": "expression",
+        "id": "31",
+        "folderId": "91",
+        "color": "#c74440",
+        "latex": "p_{impact}=0.5",
+        "slider": {
+          "hardMin": true,
+          "hardMax": true,
+          "min": "0",
+          "max": "1"
+        }
+      },
+      {
+        "type": "folder",
+        "id": "38",
+        "title": "calculations"
+      },
+      {
+        "type": "text",
+        "id": "67",
+        "folderId": "38",
+        "text": "how much project decides to increase the metric by (turns out that increasing to f_max is always optimal)"
+      },
+      {
+        "type": "expression",
+        "id": "53",
+        "folderId": "38",
+        "color": "#c74440",
+        "latex": "m_{manip}=f_{max}\\cdot\\left(1-p_{start}\\right)",
+        "slider": {
+          "hardMin": true,
+          "hardMax": true,
+          "min": "0",
+          "max": "100"
+        }
+      },
+      {
+        "type": "text",
+        "id": "42",
+        "folderId": "38",
+        "text": "loss from acquiring x shares"
+      },
+      {
+        "type": "expression",
+        "id": "44",
+        "folderId": "38",
+        "color": "#000000",
+        "latex": "f_{loss}=\\ x\\cdot\\left(\\frac{f_{delta}\\cdot p_{impact}}{f_{max}}\\right)",
+        "hidden": true
+      },
+      {
+        "type": "text",
+        "id": "134",
+        "folderId": "38",
+        "text": "capital required to manip market"
+      },
+      {
+        "type": "expression",
+        "id": "104",
+        "folderId": "38",
+        "color": "#c74440",
+        "latex": "c_{nomanip}=x\\cdot\\frac{\\left(p_{start}\\cdot f_{max}+f_{delta}\\cdot p_{impact}\\right)}{f_{max}}\\left\\{x>0\\right\\}",
+        "hidden": true,
+        "lineWidth": "4"
+      },
+      {
+        "type": "text",
+        "id": "46",
+        "folderId": "38",
+        "text": "total pnl, if we manip market, receive grant and do not manip metric"
+      },
+      {
+        "type": "expression",
+        "id": "47",
+        "folderId": "38",
+        "color": "#2d70b3",
+        "latex": "p_{nomanip}\\left(x\\right)=\\ g_{value}-f_{loss}-c_{nomanip}\\cdot c_{cost}",
+        "lineWidth": "4"
+      },
+      {
+        "type": "text",
+        "id": "51",
+        "folderId": "38",
+        "text": "profit on shares if we do manip metric"
+      },
+      {
+        "type": "expression",
+        "id": "52",
+        "folderId": "38",
+        "color": "#000000",
+        "latex": "f_{value}=x\\cdot\\left(\\frac{m_{manip}}{f_{max}}\\right)",
+        "hidden": true
+      },
+      {
+        "type": "expression",
+        "id": "136",
+        "folderId": "38",
+        "color": "#c74440",
+        "latex": "p_{shareprofit}=\\left(\\frac{m_{manip}}{f_{max}}\\right)-\\left(\\frac{f_{delta}\\cdot p_{impact}}{f_{max}}\\right)"
+      },
+      {
+        "type": "text",
+        "id": "55",
+        "folderId": "38",
+        "text": "cost of manipulating metric"
+      },
+      {
+        "type": "expression",
+        "id": "57",
+        "folderId": "38",
+        "color": "#6042a6",
+        "latex": "m_{totcost}=\\left(m_{cost}+\\frac{m_{manip}\\cdot m_{acc}}{2}\\right)\\cdot m_{manip}"
+      },
+      {
+        "type": "text",
+        "id": "102",
+        "folderId": "38",
+        "text": "value derived from manipulating metric"
+      },
+      {
+        "type": "expression",
+        "id": "103",
+        "folderId": "38",
+        "color": "#c74440",
+        "latex": "m_{totvalue}=m_{value}\\cdot m_{manip}"
+      },
+      {
+        "type": "text",
+        "id": "135",
+        "folderId": "38",
+        "text": "capital required to manip market and manip metric"
+      },
+      {
+        "type": "expression",
+        "id": "107",
+        "folderId": "38",
+        "color": "#c74440",
+        "latex": "c_{manip}=x\\cdot\\frac{\\left(p_{start}\\cdot f_{max}+f_{delta}\\cdot p_{impact}\\right)}{f_{max}}+m_{totcost}\\left\\{x>0\\right\\}",
+        "hidden": true,
+        "lineWidth": "4"
+      },
+      {
+        "type": "text",
+        "id": "49",
+        "folderId": "38",
+        "text": "total pnl if we manip market, receive grant and do manip metric"
+      },
+      {
+        "type": "expression",
+        "id": "58",
+        "folderId": "38",
+        "color": "#fa7e19",
+        "latex": "p_{manip}\\left(x\\right)=\\left(f_{value}-f_{loss}\\right)-m_{totcost}+m_{totvalue}-c_{manip}\\cdot c_{cost}",
+        "lines": true,
+        "lineWidth": "4"
+      },
+      {
+        "type": "folder",
+        "id": "120",
+        "title": "outputs"
+      },
+      {
+        "type": "text",
+        "id": "99",
+        "folderId": "120",
+        "text": "PnL of strategy with highest pnl \n\n(i.e. either manipulate metric or do not manipulate metric)"
+      },
+      {
+        "type": "expression",
+        "id": "95",
+        "folderId": "120",
+        "color": "#388c46",
+        "latex": "y=\\max\\left(p_{manip}\\left(x\\right),p_{nomanip}\\left(x\\right)\\right)\\ \\left\\{\\max\\left(p_{manip}\\left(x\\right),p_{nomanip}\\left(x\\right)\\right)>0\\right\\}",
+        "lineWidth": "5"
+      },
+      {
+        "type": "expression",
+        "id": "127",
+        "folderId": "120",
+        "color": "#c74440",
+        "latex": "y=\\max\\left(p_{manip}\\left(x\\right),p_{nomanip}\\left(x\\right)\\right)\\ \\left\\{\\max\\left(p_{manip}\\left(x\\right),p_{nomanip}\\left(x\\right)\\right)<0\\right\\}",
+        "lineWidth": "5"
+      }
+    ]
+  },
+  "includeFunctionParametersInRandomSeed": true,
+  "doNotMigrateMovablePointStyle": true
+}
